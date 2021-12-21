@@ -23,6 +23,7 @@
   "homepage": "https://github.com/angelacuahutle/CapstoneJS-API-Webapp#readme",
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.16.5",
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "css-loader": "^6.5.1",
     "express": "^4.17.1",
     "html-webpack-plugin": "^5.5.0",
