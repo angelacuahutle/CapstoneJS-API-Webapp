@@ -1,5 +1,5 @@
 {
-  "name": "Setup-Webpack",
+  "name": "CapstoneJS-API-Webapp",
   "version": "1.0.0",
   "description": "\"To-do list\" is a tool that helps to organize your day. It simply lists the things that you need to do and allows you to mark them as complete. You will build a simple website that allows for doing that, and you will do it using ES6 and Webpack!",
   "main": "index.js",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/angelacuahutle/Setup-Webpack.git"
+    "url": "git+https://github.com/angelacuahutle/CapstoneJS-API-Webapp.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/angelacuahutle/Setup-Webpack/issues"
+    "url": "https://github.com/angelacuahutle/CapstoneJS-API-Webapp/issues"
   },
-  "homepage": "https://github.com/angelacuahutle/Setup-Webpack#readme",
+  "homepage": "https://github.com/angelacuahutle/CapstoneJS-API-Webapp#readme",
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.16.5",
     "css-loader": "^6.5.1",
