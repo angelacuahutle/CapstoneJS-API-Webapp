@@ -2,6 +2,8 @@ import '@fortawesome/fontawesome-free/js/fontawesome';
 import '@fortawesome/fontawesome-free/js/solid';
 import '@fortawesome/fontawesome-free/js/regular';
 import '@fortawesome/fontawesome-free/js/brands';
+import 'custom';
+import 'bootstrap/src/css/bootstrap.min.css';
 
 import printMe from './print.js';
 import './style.css';
