@@ -2,3 +2,31 @@
 body {
   background-color: bisque;
 }
+
+nav {
+  height: 10vh;
+  background-color: blue;
+}
+
+main {
+  height: 80vh;
+}
+
+footer {
+  height: 10vh;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+ul > li.list-items > a{
+  text-decoration: none;
+}
+
+.item-nav {
+  font-size: 1.5em;
+}
