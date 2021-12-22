@@ -24,8 +24,13 @@
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.16.5",
     "@fortawesome/fontawesome-free": "^5.15.4",
+    "babel-eslint": "^10.1.0",
     "css-loader": "^6.5.1",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.25.3",
     "express": "^4.17.1",
+    "hint": "^6.1.9",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.4.5",
     "style-loader": "^3.3.1",
