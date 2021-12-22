@@ -5,11 +5,11 @@ import '@fortawesome/fontawesome-free/js/brands';
 import './css/bootstrap.min.css';
 import './css/style.css';
 
-import { Poke_API } from './PokeTCG_API';
+import { PokemonAPI } from './PokeTCG_API';
 
 const PokeCards = document.getElementById('pokeCards');
 
-Poke_API.TCGpokemon.getTwelveCardsSwSh().then((data) => {
+PokemonAPI.TCGpokemon.getTwelveCardsSwSh().then((data) => {
   console.log(data);
   data.data.forEach( pokemon => {
     const cardContainer = document.createElement('div');
