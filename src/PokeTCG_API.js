@@ -1,11 +1,11 @@
 class Poke_API {
     TCGpokemon = {
-      PokeURL = 'https://api.pokemontcg.io/v2/cards?q=',  
+      PokeURL: 'https://api.pokemontcg.io/v2/cards?q=',  
       passOptions: (objOption) => {
         const options = {
-          method: `${objOption.method}`,
+          method: `${objOption}`,
           headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
+            'Content-Type': `application/json; charset=UTF-8`,
           },
         };
         return options;
@@ -16,9 +16,15 @@ class Poke_API {
         const response = await fetch(url, options);
         return response.json();
       },  
-      getAllCards: () => this.TCGpokemon.basicCall2Api('set.id:swsh1'),  
-      getCardbyId: (cardId) => this.TCGpokemon.basicCall2Api(`id:${cardId}`),
+      get valueGetAllCards() {
+        return this.getTwelveCardsSwSh();
+      },  
+      getCardSetSwShbyId: (cardId) => this.TCGpokemon.basicCall2Api(`id:${cardId}`),
+      getTwelveCardsSwSh: () => this.TCGpokemon.basicCall2Api('set.id:swsh1&pageSize=12'),
     }
   }
   
-  export { Poke_API };
+  
+  const PokemonAPI = new Poke_API();
+  
+  export { PokemonAPI, Poke_API };
