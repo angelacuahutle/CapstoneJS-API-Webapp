@@ -29,14 +29,13 @@ ul {
   overflow: hidden;
 }
 
-ul > li.list-items > a{
+ul > li.list-items > a {
   text-decoration: none;
 }
 
 .item-nav {
   font-size: 1.5em;
 }
-
 
 .btn-primary {
   border: 2px solid black;
@@ -72,7 +71,7 @@ ul > li.list-items > a{
 }
 
 .card-text {
-  height: 144px
+  height: 144px;
 }
 
 .iconLike {
