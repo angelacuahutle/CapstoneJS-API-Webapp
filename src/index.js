@@ -10,7 +10,7 @@ import { createPokeCard } from './homepage';
 
 PokemonAPI.TCGpokemon.getTwelveCardsSwSh().then((data) => {
   console.log(data);
-  data.data.forEach( pokemon => {
+  data.data.forEach((pokemon) => {
     createPokeCard(pokemon);
   });
 });
