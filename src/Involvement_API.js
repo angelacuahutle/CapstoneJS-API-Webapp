@@ -1,4 +1,3 @@
-
 class InvAPI {
   microverseInvolvement = {
     APIKey: 'jO96LQf9ZZkhY1OlDSZo',
@@ -7,8 +6,8 @@ class InvAPI {
       const options = {
         method: `${objOption}`,
         headers: {
-          'Content-Type': `application/json; charset=UTF-8`,
-        }
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
       };
       return options;
     },
@@ -17,11 +16,10 @@ class InvAPI {
       const options = this.microverseInvolvement.passOptions(method);
       options.body = JSON.stringify(bodyObj);
       const response = await fetch(url, options);
-      if (method === 'POST'){
+      if (method === 'POST') {
         return response.text();
-      } else {
-        return response.json();
       }
+      return response.json();
     },
     postLike: (cardId) => {
       const bodyObj = {
@@ -33,12 +31,14 @@ class InvAPI {
       this.microverseInvolvement.basicCall2Api('GET', 'likes');
     },
     postComment: (commentObj) => {
-      this.microverseInvolvement.basicCall2Api('POST', 'comments', commentObj)
+      this.microverseInvolvement.basicCall2Api('POST', 'comments', commentObj);
     },
     getComments: (cardId) => {
-      this.microverseInvolvement.basicCall2Api('GET', `comments?item_id=${cardId}`)
+      this.microverseInvolvement.basicCall2Api('GET', `comments?item_id=${cardId}`);
     },
   }
 }
+
 const DataAPI = new InvAPI();
+// eslint-disable-next-line import/prefer-default-export
 export { DataAPI };
