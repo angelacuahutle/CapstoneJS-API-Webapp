@@ -3,25 +3,14 @@ import '@fortawesome/fontawesome-free/js/solid';
 import '@fortawesome/fontawesome-free/js/regular';
 import '@fortawesome/fontawesome-free/js/brands';
 import './css/bootstrap.min.css';
-
-import printMe from './print.js';
 import './css/style.css';
 
-function component() {
-  
-  const element = document.createElement('div');
-  const btn = document.createElement('button');
+import { PokemonAPI } from './PokeTCG_API';
+import { createPokeCard } from './homepage';
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
-
-  btn.innerHTML = 'Click me and check the console!';
-  btn.onclick = printMe;
-
-  element.appendChild(btn);
-
-  return element;
-}
-
-document.body.appendChild(component());
+PokemonAPI.TCGpokemon.getTwelveCardsSwSh().then((data) => {
+  console.log(data);
+  data.data.forEach((pokemon) => {
+    createPokeCard(pokemon);
+  });
+});
