@@ -16,6 +16,11 @@ footer {
   height: 10vh;
 }
 
+h5 {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -29,4 +34,46 @@ ul > li.list-items > a{
 
 .item-nav {
   font-size: 1.5em;
+}
+
+
+.btn-primary {
+  border: 2px solid black;
+  box-shadow: 6px 6px black;
+  font-weight: bold;
+  background-color: whitesmoke;
+  border-color: black;
+  color: black;
+}
+
+.btn-primary:hover {
+  box-shadow: 4px 4px black;
+  background-color: black;
+  border-color: black;
+  color: white;
+}
+
+.btn-primary:active {
+  box-shadow: 2px 2px black;
+  background-color: black;
+  border-color: black;
+  color: white;
+}
+
+.btn-primary:focus {
+  background-color: grey;
+  border-color: black;
+  color: white;
+}
+
+.card-style {
+  box-shadow: 1px 8px 16px rgba(88, 88, 88, 0.48);
+}
+
+.card-text {
+  height: 144px
+}
+
+.iconLike {
+  color: black;
 }
