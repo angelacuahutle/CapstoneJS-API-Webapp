@@ -1,7 +1,12 @@
 import { DataAPI } from './Involvement_API';
 import { PokemonAPI } from './PokeTCG_API';
+import { createModalPopUp } from './modal-comment';
 
 const PokeCards = document.getElementById('pokeCards');
+const modalContainer = document.getElementById('modal-popup-container');
+const headerContainer = document.getElementById('navContainer');
+const mainContainer = document.getElementById('mainContainer');
+const footeContainer = document.getElementById('footerContainer');
 
 const updateLikeCount = (likeCount, pokemonId) => {
   const likeCountElement = document.getElementById(`likeCount${pokemonId}`);
@@ -51,6 +56,7 @@ const createPokeCard = (pokemon) => {
   cardText.classList.add('card-text', 'd-flex', 'justify-content-evenly', 'align-items-center');
   cardText.innerText = pokemon.flavorText || 'No Description';
   commentButton.classList.add('btn', 'btn-primary', 'col-6');
+  commentButton.id = `commentButton_${pokemon.id}`;
   commentButton.innerText = 'Comments';
 
   likeIconContainer.appendChild(likeIcon);
@@ -84,6 +90,14 @@ const createPokeCard = (pokemon) => {
         updateLikeCount(data, pokemon.id);
       });
     });
+  });
+
+  commentButton.addEventListener('click', () => {
+    modalContainer.classList.remove('hidden');
+    headerContainer.classList.add('hidden');
+    mainContainer.classList.add('hidden');
+    footeContainer.classList.add('hidden');
+    createModalPopUp(pokemon);
   });
 };
 
