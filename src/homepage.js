@@ -82,6 +82,12 @@ const renderAllPokeCards = () => {
       createPokeCard(pokemon);
     });
     return data.data;
+  }).then((arrayPokemonInfo) => {
+    arrayPokemonInfo.forEach((pokemon) => {
+      getOnelikeCount(pokemon.id).then((data) => {
+        updateLikeCount(data, pokemon.id);
+      });
+    });
   });
 };
 // eslint-disable-next-line import/prefer-default-export
