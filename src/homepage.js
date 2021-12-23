@@ -1,4 +1,17 @@
+import { DataAPI } from './Involvement_API';
+import { PokemonAPI } from './PokeTCG_API';
+
 const PokeCards = document.getElementById('pokeCards');
+
+const updateLikeCount = (likeCount, pokemonId) => {
+  const likeCountElement = document.getElementById(`likeCount${pokemonId}`);
+  likeCountElement.innerHTML = likeCount;
+};
+
+const getOnelikeCount = (pokemonId) => DataAPI.microverseInvolvement.getLikes().then((data) => {
+  const UpdateLikeCount = data.filter((like) => like.item_id === pokemonId);
+  return UpdateLikeCount[0].likes;
+});
 
 const createPokeCard = (pokemon) => {
   const cardContainer = document.createElement('div');
@@ -22,6 +35,7 @@ const createPokeCard = (pokemon) => {
   likeIconContainer.classList.add('col-4', 'pb-2', 'd-flex', 'justify-content-center', 'align-items-center', 'iconLike');
   likeIcon.classList.add('fas', 'fa-heart', 'fa-2x', 'col-4', 'd-flex', 'justify-content-center', 'align-items-center');
   likeCount.classList.add('col-2', 'd-flex', 'justify-content-center', 'align-items-center');
+  likeCount.id = `likeCount${pokemon.id}`;
   likeCount.innerText = 0;
   cardText.classList.add('card-text', 'd-flex', 'justify-content-evenly', 'align-items-center');
   cardText.innerText = pokemon.flavorText || 'No Description';
@@ -52,9 +66,27 @@ const createPokeCard = (pokemon) => {
               modal.style.display = 'none';
           })
       } */
+
+  likeIconContainer.addEventListener('click', () => {
+    DataAPI.microverseInvolvement.postLike(pokemon.id).then(() => {
+      getOnelikeCount(pokemon.id).then((data) => {
+        updateLikeCount(data, pokemon.id);
+      });
+    });
+  });
+};
+
+const renderAllPokeCards = () => {
+  PokemonAPI.TCGpokemon.getTwelveCardsSwSh().then((data) => {
+    data.data.forEach((pokemon) => {
+      createPokeCard(pokemon);
+    });
+    return data.data;
+  });
 };
 // eslint-disable-next-line import/prefer-default-export
 export {
 // eslint-disable-next-line import/prefer-default-export
   createPokeCard,
+  renderAllPokeCards,
 };

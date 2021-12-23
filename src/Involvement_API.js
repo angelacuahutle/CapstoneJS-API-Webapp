@@ -27,15 +27,9 @@ class InvAPI {
       };
       return this.microverseInvolvement.basicCall2Api('POST', 'likes', bodyObj);
     },
-    getLikes: () => {
-      this.microverseInvolvement.basicCall2Api('GET', 'likes');
-    },
-    postComment: (commentObj) => {
-      this.microverseInvolvement.basicCall2Api('POST', 'comments', commentObj);
-    },
-    getComments: (cardId) => {
-      this.microverseInvolvement.basicCall2Api('GET', `comments?item_id=${cardId}`);
-    },
+    getLikes: () => this.microverseInvolvement.basicCall2Api('GET', 'likes'),
+    postComment: (commentObj) => this.microverseInvolvement.basicCall2Api('POST', 'comments', commentObj),
+    getComments: (cardId) => this.microverseInvolvement.basicCall2Api('GET', `comments?item_id=${cardId}`),
   }
 }
 

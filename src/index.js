@@ -5,11 +5,8 @@ import '@fortawesome/fontawesome-free/js/brands';
 import './css/bootstrap.min.css';
 import './css/style.css';
 
-import { PokemonAPI } from './PokeTCG_API';
-import { createPokeCard } from './homepage';
+import { renderAllPokeCards } from './homepage';
 
-PokemonAPI.TCGpokemon.getTwelveCardsSwSh().then((data) => {
-  data.data.forEach((pokemon) => {
-    createPokeCard(pokemon);
-  });
-});
+window.onload = () => {
+  renderAllPokeCards();
+};
