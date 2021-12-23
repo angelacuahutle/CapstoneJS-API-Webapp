@@ -1,5 +1,3 @@
-import { DataAPI } from './Involvement_API';
-
 const PokeCards = document.getElementById('pokeCards');
 
 const createPokeCard = (pokemon) => {
@@ -54,8 +52,7 @@ const createPokeCard = (pokemon) => {
               modal.style.display = 'none';
           })
       } */
-
- 
+};
 // eslint-disable-next-line import/prefer-default-export
 export {
 // eslint-disable-next-line import/prefer-default-export
