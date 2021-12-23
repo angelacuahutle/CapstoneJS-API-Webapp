@@ -39,19 +39,22 @@ const createPokeCard = (pokemon) => {
   cardContainer.appendChild(card);
   PokeCards.appendChild(cardContainer);
   /* cardContainer.addEventListener('click', () => {
-        const modal = document.getElementById('modal');
-        const modalImg = document.getElementById('modal-img');
-        const modalTitle = document.getElementById('modal-title');
-        const modalText = document.getElementById('modal-text');
-        const modalClose = document.getElementById('modal-close');
-        modal.style.display = 'block';
-        modalImg.src = pokemon.images.large;
-        modalTitle.innerText = pokemon.name;
-        modalText.innerText = pokemon.text;
-        modalClose.addEventListener('click', () => {
-            modal.style.display = 'none';
-        })
-    } */
+          const modal = document.getElementById('modal');
+          const modalImg = document.getElementById('modal-img');
+          const modalTitle = document.getElementById('modal-title');
+          const modalText = document.getElementById('modal-text');
+          const modalClose = document.getElementById('modal-close');
+          modal.style.display = 'block';
+          modalImg.src = pokemon.images.large;
+          modalTitle.innerText = pokemon.name;
+          modalText.innerText = pokemon.text;
+          modalClose.addEventListener('click', () => {
+              modal.style.display = 'none';
+          })
+      } */
 };
-
-export { createPokeCard }; // eslint-disable-line import/prefer-default-export
+// eslint-disable-next-line import/prefer-default-export
+export {
+// eslint-disable-next-line import/prefer-default-export
+  createPokeCard,
+};

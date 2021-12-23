@@ -1,9 +1,51 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Development</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="/index.bundle.js"></script><script defer src="/print.bundle.js"></script></head>
-  <body>
-  </body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <title>Home Page</title>
+<script defer src="/index.bundle.js"></script></head>
+
+<body class="">
+    <nav class="row">
+        <div class="logo d-flex col-3">
+            <img src="../css/img/pngwing.com.png" alt="" class="logo">
+        </div>
+        <ul class="col-9 d-flex justify-content-around align-items-center">
+            <li class="list-items"><a class="item-nav text-white" href="">cards</a></li>
+            <li class="list-items"><a class="item-nav text-white" href="">Pokemon</a></li>
+            <li class="list-items"><a class="item-nav text-white" href="">Trainer</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        <section id="pokeCards" class="row align-items-center">
+            <div class="col-12 col-sm-6 col-md-3 pt-4">
+                <div class="card border border-2 border-black card-style">
+                    <img class="card-img-top" src="..." alt="Pokemon Card image">
+                    <div class="card-body row justify-content-center align-items-center">
+                        <h5 class="card-title pb-2 col-6 d-flex justify-content-center align-items-center">Card title</h5>
+                        <a class="col-4 pb-2 d-flex justify-content-center align-items-center iconLike">
+                            <i class="fas fa-heart"></i>
+                        </a>
+                        <span class="col-2 pb-2 d-flex justify-content-center align-items-center">0</span>
+                        <p class="card-text justi">Some quick example text to build on the card title and make up the bulk of the
+                            card's content.</p>
+                        <a href="#" class="btn btn-primary col-6">Comments</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="row">
+        <div class="col-12 d-flex justify-content-start align-items-center">
+            <h2>Created by Luis Abarca and Angela Cuahutle</h2>
+        </div>
+    </footer>
+</body>
+
 </html>
