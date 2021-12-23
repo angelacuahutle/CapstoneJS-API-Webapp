@@ -13,6 +13,17 @@ const getOnelikeCount = (pokemonId) => DataAPI.microverseInvolvement.getLikes().
   return UpdateLikeCount[0].likes;
 });
 
+const countNumberOfCards = () => {
+  const numberOfCards = document.querySelectorAll('.card');
+  console.log(numberOfCards);
+  return numberOfCards.length;
+};
+
+const displayNumberOfCards = (howmany) => {
+  const numberOfCards = document.getElementById('numberOfCards');
+  numberOfCards.innerHTML = ` [${howmany}]`;
+};
+
 const createPokeCard = (pokemon) => {
   const cardContainer = document.createElement('div');
   const card = document.createElement('div');
@@ -88,6 +99,8 @@ const renderAllPokeCards = () => {
         updateLikeCount(data, pokemon.id);
       });
     });
+    const numberCards = countNumberOfCards();
+    displayNumberOfCards(numberCards);
   });
 };
 // eslint-disable-next-line import/prefer-default-export
