@@ -1,6 +1,5 @@
 import { DataAPI } from './Involvement_API';
 import { PokemonAPI } from './PokeTCG_API';
-import { createModalPopUp } from './modal-comment';
 
 const PokeCards = document.getElementById('pokeCards');
 
