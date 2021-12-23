@@ -1,19 +1,17 @@
-import { DataAPI } from "./Involvement_API";
+import { DataAPI } from './Involvement_API';
 import { PokemonAPI } from './PokeTCG_API';
-const PokeCards = document.getElementById('pokeCards');
 
+const PokeCards = document.getElementById('pokeCards');
 
 const updateLikeCount = (likeCount, pokemonId) => {
   const likeCountElement = document.getElementById(`likeCount${pokemonId}`);
   likeCountElement.innerHTML = likeCount;
 };
 
-const getOnelikeCount = (pokemonId) => {
-  return DataAPI.microverseInvolvement.getLikes().then((data) => {
-    const UpdateLikeCount = data.filter((like) => { return like.item_id === pokemonId; });
-    return UpdateLikeCount[0].likes; 
-  });
-};
+const getOnelikeCount = (pokemonId) => DataAPI.microverseInvolvement.getLikes().then((data) => {
+  const UpdateLikeCount = data.filter((like) => like.item_id === pokemonId);
+  return UpdateLikeCount[0].likes;
+});
 
 const createPokeCard = (pokemon) => {
   const cardContainer = document.createElement('div');
@@ -68,14 +66,14 @@ const createPokeCard = (pokemon) => {
               modal.style.display = 'none';
           })
       } */
-  
+
   likeIconContainer.addEventListener('click', () => {
-    DataAPI.microverseInvolvement.postLike(pokemon.id).then((res) => {
+    DataAPI.microverseInvolvement.postLike(pokemon.id).then(() => {
       getOnelikeCount(pokemon.id).then((data) => {
         updateLikeCount(data, pokemon.id);
       });
     });
-  }); 
+  });
 };
 
 const renderAllPokeCards = () => {
@@ -85,7 +83,7 @@ const renderAllPokeCards = () => {
     });
     return data.data;
   });
-}
+};
 // eslint-disable-next-line import/prefer-default-export
 export {
 // eslint-disable-next-line import/prefer-default-export

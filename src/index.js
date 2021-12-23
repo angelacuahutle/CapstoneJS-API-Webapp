@@ -5,9 +5,8 @@ import '@fortawesome/fontawesome-free/js/brands';
 import './css/bootstrap.min.css';
 import './css/style.css';
 
-import { PokemonAPI } from './PokeTCG_API';
-import { createPokeCard, renderAllPokeCards } from './homepage';
+import { renderAllPokeCards } from './homepage';
 
 window.onload = () => {
   renderAllPokeCards();
-}
+};
