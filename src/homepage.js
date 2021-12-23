@@ -91,7 +91,7 @@ const createPokeCard = (pokemon) => {
       });
     });
   });
-  
+
   commentButton.addEventListener('click', () => {
     modalContainer.classList.remove('hidden');
     headerContainer.classList.add('hidden');
@@ -99,7 +99,6 @@ const createPokeCard = (pokemon) => {
     footeContainer.classList.add('hidden');
     createModalPopUp(pokemon);
   });
-  
 };
 
 const renderAllPokeCards = () => {
