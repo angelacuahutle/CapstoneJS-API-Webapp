@@ -77,3 +77,9 @@ ul > li.list-items > a {
 .iconLike {
   color: black;
 }
+
+#numberOfCards {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
