@@ -55,14 +55,7 @@ const createPokeCard = (pokemon) => {
           })
       } */
 
-  likeIconContainer.addEventListener('click', () => {
-    // eslint-disable-next-line
-    DataAPI.microverseInvolvement.postLike(pokemon.id).then((data) => {
-    // console.log(data);
-    });
-  });
-};
-
+ 
 // eslint-disable-next-line import/prefer-default-export
 export {
 // eslint-disable-next-line import/prefer-default-export
