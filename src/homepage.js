@@ -82,7 +82,7 @@ const renderAllPokeCards = () => {
       createPokeCard(pokemon);
     });
     return data.data;
-  }).then(( arrayPokemonInfo) => {
+  }).then((arrayPokemonInfo) => {
     arrayPokemonInfo.forEach((pokemon) => {
       getOnelikeCount(pokemon.id).then((data) => {
         updateLikeCount(data, pokemon.id);
