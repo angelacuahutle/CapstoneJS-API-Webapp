@@ -1,15 +1,14 @@
 import {
-  DataAPI
-} from "./Involvement_API";
+  DataAPI,
+} from './Involvement_API';
+
 const modalContainer = document.getElementById('modal-popup-container');
 const headerContainer = document.getElementById('navContainer');
 const mainContainer = document.getElementById('mainContainer');
 const footeContainer = document.getElementById('footerContainer');
-const countComments = (pokeId) => DataAPI.microverseInvolvement.getComments(pokeId).then((response) => {
-  return response.length;
-});
+const countComments = (pokeId) =>
+DataAPI.microverseInvolvement.getComments(pokeId).then((response) => response.length);
 const createModalPopUp = (pokemonObject) => {
-  console.log(pokemonObject);
   const modal = document.createElement('div');
   const closeCol = document.createElement('div');
   const closeIcon = document.createElement('i');
@@ -21,7 +20,7 @@ const createModalPopUp = (pokemonObject) => {
   const divHpValue = document.createElement('div');
   const divRarityLabel = document.createElement('div');
   const divRarityValue = document.createElement('div');
-  const commentsContainer =  document.createElement('div');
+  const commentsContainer = document.createElement('div');
   const formContainer = document.createElement('div');
   const firstdivContainer = document.createElement('div');
   const seconddivContainer = document.createElement('div');
@@ -34,9 +33,9 @@ const createModalPopUp = (pokemonObject) => {
   const commentBtn = document.createElement('button');
   const commentsColContainer = document.createElement('div');
   commentsColContainer.id = 'fatherCommentsContainer';
-  commentsColContainer.classList.add('col-12', 'mt-4' ,'col-sm-6');
+  commentsColContainer.classList.add('col-12', 'mt-4', 'col-sm-6');
   formContainer.classList.add('col-12', 'col-sm-6');
-  commentsContainer.classList.add('row', 'justify-content-center', 'align-items-center','mt-3');
+  commentsContainer.classList.add('row', 'justify-content-center', 'align-items-center', 'mt-3');
   labelName.classList.add('col-sm-2', 'col-form-label');
   labelComment.classList.add('col-sm-2', 'col-form-label');
   firstdivContainer.classList.add('form-group', 'row');
@@ -101,25 +100,14 @@ const createModalPopUp = (pokemonObject) => {
   modalContainer.appendChild(modal);
   const closeModal = document.querySelector('.close-popup');
   closeModal.addEventListener('click', () => {
-    console.log('clicked');
     modalContainer.classList.add('hidden');
     document.querySelector('.modal-popup').removeChild(document.querySelector('.square-container'));
     headerContainer.classList.remove('hidden');
     mainContainer.classList.remove('hidden');
     footeContainer.classList.remove('hidden');
   });
-  /*window.addEventListener('click', (event) => {
-    if (event.target === modal) {
-      modal.style.display = 'none';
-    }
-  });*/
-  /*
-  const testinputele = document.querySelector('#YourName');
-  testinputele.addEventListener('keyup', (event) => {
-    console.log(event.target.value);
-  });*/
+  
   const btnpostComment = document.querySelector(`#commentBtn_${pokemonObject.id}`);
-  console.log(btnpostComment);
   btnpostComment.addEventListener('click', () => {
     console.log('clicked');
     const inputNamevalue = inputName.value;
@@ -127,9 +115,8 @@ const createModalPopUp = (pokemonObject) => {
     const bodyObj = {
       item_id: pokemonObject.id,
       username: inputNamevalue,
-      comment: inputCommentvalue
+      comment: inputCommentvalue,
     };
-    console.log(bodyObj);
     DataAPI.microverseInvolvement.postComment(bodyObj).then((response) => {
       console.log(response);
       renderComments(pokemonObject.id, commentsColContainer, commentsContainer);
@@ -147,16 +134,15 @@ const renderComments = (pokeId, commentsCol, commentsContainer) => {
   });
   commentTittle.appendChild(commentsCounter);
   commentsCol.appendChild(commentTittle);
-  console.log(pokeId);
   DataAPI.microverseInvolvement.getComments(pokeId).then((response) => {
-    if ( typeof response === 'object' && !response.hasOwnProperty('error')) {
+    if (typeof response === 'object' && !response.hasOwnProperty('error')) {
       response.forEach((comment) => {
         const mixObj = { ...comment, id: pokeId };
         const elementComment = populateComments(mixObj);
         commentsCol.appendChild(elementComment);
       });
       commentsContainer.appendChild(commentsCol);
-    }else if (typeof response === 'object' && response.error.status === 400) {
+    } else if (typeof response === 'object' && response.error.status === 400) {
       commentsCounter.innerText = ' [0]';
       commentsCol.innerHTML += 'No comments yet';
       commentsContainer.appendChild(commentsCol);
@@ -165,7 +151,7 @@ const renderComments = (pokeId, commentsCol, commentsContainer) => {
 };
 
 const populateComments = (invComment) => {
-  //console.log(invComment);
+  // console.log(invComment);
   const commentsRow = document.createElement('div');
   const cmntDisplayTime = document.createElement('div');
   const cmntDisplayName = document.createElement('div');
@@ -184,9 +170,9 @@ const populateComments = (invComment) => {
   return commentsRow;
 };
 const defyJSLinter = () => {
-  console.log('Created in order to not only import one thing but also to not have a linter error.');
+  //console.log('Created in order to not only import one thing but also to not have a linter error.');
 };
 export {
   createModalPopUp,
-  defyJSLinter
+  defyJSLinter,
 };
