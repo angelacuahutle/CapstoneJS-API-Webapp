@@ -34,8 +34,8 @@ const createModalPopUp = (pokemonObject) => {
   const commentBtn = document.createElement('button');
   const commentsColContainer = document.createElement('div');
   commentsColContainer.id = 'fatherCommentsContainer';
-  commentsColContainer.classList.add('col-6');
-  formContainer.classList.add('col-6');
+  commentsColContainer.classList.add('col-12', 'mt-4' ,'col-sm-6');
+  formContainer.classList.add('col-12', 'col-sm-6');
   commentsContainer.classList.add('row', 'justify-content-center', 'align-items-center','mt-3');
   labelName.classList.add('col-sm-2', 'col-form-label');
   labelComment.classList.add('col-sm-2', 'col-form-label');
@@ -85,8 +85,8 @@ const createModalPopUp = (pokemonObject) => {
   formContainer.appendChild(firstdivContainer);
   formContainer.appendChild(seconddivContainer);
   formContainer.appendChild(commentBtn);
-  commentsContainer.appendChild(commentsColContainer);
   commentsContainer.appendChild(formContainer);
+  commentsContainer.appendChild(commentsColContainer);
   closeCol.appendChild(closeIcon);
   bodyModal.appendChild(imageContainer);
   bodyModal.appendChild(titleContainer);
@@ -142,19 +142,25 @@ const renderComments = (pokeId, commentsCol, commentsContainer) => {
   const commentsCounter = document.createElement('span');
   const commentTittle = document.createElement('h5');
   commentTittle.innerText = 'Comments';
-  //commentsCounter.innerText = '[0]';
   countComments(pokeId).then((data) => {
     commentsCounter.innerText = ` [${data}]`;
   });
   commentTittle.appendChild(commentsCounter);
   commentsCol.appendChild(commentTittle);
+  console.log(pokeId);
   DataAPI.microverseInvolvement.getComments(pokeId).then((response) => {
-    response.forEach((comment) => {
-      const mixObj = { ...comment, id: pokeId };
-      const elementComment = populateComments(mixObj);
-      commentsCol.appendChild(elementComment);
-    });
-    commentsContainer.appendChild(commentsCol);
+    if ( typeof response === 'object' && !response.hasOwnProperty('error')) {
+      response.forEach((comment) => {
+        const mixObj = { ...comment, id: pokeId };
+        const elementComment = populateComments(mixObj);
+        commentsCol.appendChild(elementComment);
+      });
+      commentsContainer.appendChild(commentsCol);
+    }else if (typeof response === 'object' && response.error.status === 400) {
+      commentsCounter.innerText = ' [0]';
+      commentsCol.innerHTML += 'No comments yet';
+      commentsContainer.appendChild(commentsCol);
+    }
   });
 };
 const populateComments = (invComment) => {
