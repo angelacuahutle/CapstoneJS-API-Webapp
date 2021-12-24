@@ -106,7 +106,7 @@ const createModalPopUp = (pokemonObject) => {
     mainContainer.classList.remove('hidden');
     footeContainer.classList.remove('hidden');
   });
-  
+
   const btnpostComment = document.querySelector(`#commentBtn_${pokemonObject.id}`);
   btnpostComment.addEventListener('click', () => {
     console.log('clicked');
@@ -119,9 +119,11 @@ const createModalPopUp = (pokemonObject) => {
     };
     DataAPI.microverseInvolvement.postComment(bodyObj).then((response) => {
       console.log(response);
+      // eslint-disable-next-line import/prefer-default-export
       renderComments(pokemonObject.id, commentsColContainer, commentsContainer);
     });
   });
+  // eslint-disable-next-line import/prefer-default-export
   renderComments(pokemonObject.id, commentsColContainer, commentsContainer);
 };
 const renderComments = (pokeId, commentsCol, commentsContainer) => {
@@ -170,7 +172,6 @@ const populateComments = (invComment) => {
   return commentsRow;
 };
 const defyJSLinter = () => {
-  //console.log('Created in order to not only import one thing but also to not have a linter error.');
 };
 export {
   createModalPopUp,
