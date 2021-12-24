@@ -16,6 +16,14 @@ const createModalPopUp = (pokemonObject) => {
   const divHpValue = document.createElement('div');
   const divRarityLabel = document.createElement('div');
   const divRarityValue = document.createElement('div');
+  const formContainer = document.createElement('form');
+  const addComment = document.querySelector('commentBtn');
+  const firstdivContainer = document.createElement('div');
+  const imputForm = document.getElementsById('YourName');
+  const imputComment = document.getElementById('inputComment');
+  const labelName = document.createElement('label');
+  labelName.classList.add('col-sm','col-form-label');
+  firstdivContainer.classList.add('form-group, row');
   modal.classList.add('row', 'square-container');
   closeCol.classList.add('col-12', 'd-flex', 'justify-content-end', 'align-items-center', 'close-popup');
   closeIcon.classList.add('far', 'fa-times-circle', 'fa-3x');
@@ -43,6 +51,8 @@ const createModalPopUp = (pokemonObject) => {
   bodyModal.appendChild(divRarityLabel);
   bodyModal.appendChild(divRarityValue);
   bodyModal.appendChild(textContainer);
+  formContainer.appendChild(imputForm);
+  formContainer.appendChild();
   modal.appendChild(closeCol);
   modal.appendChild(bodyModal);
   modalContainer.appendChild(modal);
@@ -62,6 +72,18 @@ const createModalPopUp = (pokemonObject) => {
       modal.style.display = 'none';
     }
   });
+
+  const addComment = document.querySelector('commentBtn');
+  addComment.addEventListener('click', (e) => {
+    const imputForm = document.getElementsById('YourName');
+    const imputComment = document.getElementById('inputComment');
+    const bodyObj = {
+      item_id: cardId, addComment
+    };
+    //redcord Data
+  };
+
+});
 };
 
 const defyJSLinter = () => {
