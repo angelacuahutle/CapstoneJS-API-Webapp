@@ -27,10 +27,7 @@ class InvAPI {
       };
       return this.microverseInvolvement.basicCall2Api('POST', 'likes', bodyObj);
     },
-    postComment: (cardId) => {
-      const bodyObj = {
-        item_id: cardId,
-      };
+    postComment: (commentObj) => {
       return this.microverseInvolvement.basicCall2Api('POST', 'comments', commentObj);
     },
     getLikes: () => this.microverseInvolvement.basicCall2Api('GET', 'likes'),
