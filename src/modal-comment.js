@@ -1,4 +1,6 @@
-import { DataAPI } from "./Involvement_API";
+import {
+  DataAPI
+} from "./Involvement_API";
 
 const modalContainer = document.getElementById('modal-popup-container');
 const headerContainer = document.getElementById('navContainer');
@@ -27,11 +29,11 @@ const createModalPopUp = (pokemonObject) => {
   const firstInputContainer = document.createElement('div');
   const secondInputContainer = document.createElement('div');
   const inputName = document.createElement('input');
-  const inputComment = document.createElement('input'); 
+  const inputComment = document.createElement('input');
   const commentBtn = document.createElement('button');
   /*const imputForm = document.getElementsById('YourName');
   const imputComment = document.getElementById('inputComment');*/
-  
+
   labelName.classList.add('col-sm-2', 'col-form-label');
   labelComment.classList.add('col-sm-2', 'col-form-label');
   firstdivContainer.classList.add('form-group', 'row');
@@ -72,7 +74,7 @@ const createModalPopUp = (pokemonObject) => {
   commentBtn.innerText = 'Add Comment';
   commentBtn.setAttribute('type', 'submit');
   commentBtn.id = `commentBtn_${pokemonObject.id}`;
-  
+
   firstInputContainer.appendChild(inputName);
   firstdivContainer.appendChild(labelName);
   firstdivContainer.appendChild(firstInputContainer);
@@ -127,18 +129,28 @@ const createModalPopUp = (pokemonObject) => {
     const inputNamevalue = inputName.value;
     const inputCommentvalue = inputComment.value;
     const bodyObj = {
-        item_id: pokemonObject.id,
-        username: inputNamevalue,
-        comment: inputCommentvalue
+      item_id: pokemonObject.id,
+      username: inputNamevalue,
+      comment: inputCommentvalue
     };
     console.log(bodyObj);
-    
+
     DataAPI.microverseInvolvement.postComment(bodyObj).then((response) => {
       console.log(response);
     });
   });
-  
 };
+//const displayComments = document.createElement('input');
+//  console.log(commentObj);
+//  const inputNamevalue = inputName.value;
+//  const inputCommentvalue = inputComment.value;
+//  const bodyObj = {
+//    item_id: pokemonObject.id,
+//    username: inputNamevalue,
+//    comment: inputCommentvalue
+//  };
+//};
+//return this.microverseInvolvement.basicCall2Api('POST', 'comments', commentObj);
 
 const defyJSLinter = () => {
   console.log('Created in order to not only import one thing but also to not have a linter error.');
