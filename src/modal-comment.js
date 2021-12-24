@@ -163,6 +163,7 @@ const renderComments = (pokeId, commentsCol, commentsContainer) => {
     }
   });
 };
+
 const populateComments = (invComment) => {
   //console.log(invComment);
   const commentsRow = document.createElement('div');
