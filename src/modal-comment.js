@@ -152,6 +152,15 @@ const createModalPopUp = (pokemonObject) => {
 //};
 //return this.microverseInvolvement.basicCall2Api('POST', 'comments', commentObj);
 
+export const getComments = async (id) => {
+  const response = await fetch(${commentsEndpoint}?item_id=${id});
+  const comments = await response.json();
+  return comments;
+};
+
+export const commentsEndpoint = ${URL}/${PIKey}/comments;
+
+
 const defyJSLinter = () => {
   console.log('Created in order to not only import one thing but also to not have a linter error.');
 };
