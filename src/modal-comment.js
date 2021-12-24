@@ -1,12 +1,13 @@
 import {
   DataAPI
 } from "./Involvement_API";
-
 const modalContainer = document.getElementById('modal-popup-container');
 const headerContainer = document.getElementById('navContainer');
 const mainContainer = document.getElementById('mainContainer');
 const footeContainer = document.getElementById('footerContainer');
-
+const countComments = (pokeId) => DataAPI.microverseInvolvement.getComments(pokeId).then((response) => {
+  return response.length;
+});
 const createModalPopUp = (pokemonObject) => {
   console.log(pokemonObject);
   const modal = document.createElement('div');
@@ -20,8 +21,8 @@ const createModalPopUp = (pokemonObject) => {
   const divHpValue = document.createElement('div');
   const divRarityLabel = document.createElement('div');
   const divRarityValue = document.createElement('div');
+  const commentsContainer =  document.createElement('div');
   const formContainer = document.createElement('div');
-  //const addComment = document.querySelector('commentBtn');
   const firstdivContainer = document.createElement('div');
   const seconddivContainer = document.createElement('div');
   const labelName = document.createElement('label');
@@ -31,9 +32,11 @@ const createModalPopUp = (pokemonObject) => {
   const inputName = document.createElement('input');
   const inputComment = document.createElement('input');
   const commentBtn = document.createElement('button');
-  /*const imputForm = document.getElementsById('YourName');
-  const imputComment = document.getElementById('inputComment');*/
-
+  const commentsColContainer = document.createElement('div');
+  commentsColContainer.id = 'fatherCommentsContainer';
+  commentsColContainer.classList.add('col-6');
+  formContainer.classList.add('col-6');
+  commentsContainer.classList.add('row', 'justify-content-center', 'align-items-center','mt-3');
   labelName.classList.add('col-sm-2', 'col-form-label');
   labelComment.classList.add('col-sm-2', 'col-form-label');
   firstdivContainer.classList.add('form-group', 'row');
@@ -45,7 +48,6 @@ const createModalPopUp = (pokemonObject) => {
   inputName.setAttribute('type', 'text');
   inputComment.setAttribute('type', 'text');
   commentBtn.classList.add('btn', 'btn-primary', 'commentBtn');
-
   modal.classList.add('row', 'square-container');
   closeCol.classList.add('col-12', 'd-flex', 'justify-content-end', 'align-items-center', 'close-popup');
   closeIcon.classList.add('far', 'fa-times-circle', 'fa-3x');
@@ -74,7 +76,6 @@ const createModalPopUp = (pokemonObject) => {
   commentBtn.innerText = 'Add Comment';
   commentBtn.setAttribute('type', 'submit');
   commentBtn.id = `commentBtn_${pokemonObject.id}`;
-
   firstInputContainer.appendChild(inputName);
   firstdivContainer.appendChild(labelName);
   firstdivContainer.appendChild(firstInputContainer);
@@ -84,7 +85,8 @@ const createModalPopUp = (pokemonObject) => {
   formContainer.appendChild(firstdivContainer);
   formContainer.appendChild(seconddivContainer);
   formContainer.appendChild(commentBtn);
-
+  commentsContainer.appendChild(commentsColContainer);
+  commentsContainer.appendChild(formContainer);
   closeCol.appendChild(closeIcon);
   bodyModal.appendChild(imageContainer);
   bodyModal.appendChild(titleContainer);
@@ -93,14 +95,10 @@ const createModalPopUp = (pokemonObject) => {
   bodyModal.appendChild(divRarityLabel);
   bodyModal.appendChild(divRarityValue);
   bodyModal.appendChild(textContainer);
-  bodyModal.appendChild(formContainer);
-
-  /*formContainer.appendChild(imputForm);
-  formContainer.appendChild();*/
+  bodyModal.appendChild(commentsContainer);
   modal.appendChild(closeCol);
   modal.appendChild(bodyModal);
   modalContainer.appendChild(modal);
-
   const closeModal = document.querySelector('.close-popup');
   closeModal.addEventListener('click', () => {
     console.log('clicked');
@@ -110,7 +108,6 @@ const createModalPopUp = (pokemonObject) => {
     mainContainer.classList.remove('hidden');
     footeContainer.classList.remove('hidden');
   });
-
   /*window.addEventListener('click', (event) => {
     if (event.target === modal) {
       modal.style.display = 'none';
@@ -121,7 +118,6 @@ const createModalPopUp = (pokemonObject) => {
   testinputele.addEventListener('keyup', (event) => {
     console.log(event.target.value);
   });*/
-
   const btnpostComment = document.querySelector(`#commentBtn_${pokemonObject.id}`);
   console.log(btnpostComment);
   btnpostComment.addEventListener('click', () => {
@@ -134,49 +130,55 @@ const createModalPopUp = (pokemonObject) => {
       comment: inputCommentvalue
     };
     console.log(bodyObj);
-
     DataAPI.microverseInvolvement.postComment(bodyObj).then((response) => {
       console.log(response);
+      renderComments(pokemonObject.id, commentsColContainer, commentsContainer);
     });
   });
+  renderComments(pokemonObject.id, commentsColContainer, commentsContainer);
 };
-//const displayComments = document.createElement('input');
-//  console.log(commentObj);
-//  const inputNamevalue = inputName.value;
-//  const inputCommentvalue = inputComment.value;
-//  const bodyObj = {
-//    item_id: pokemonObject.id,
-//    username: inputNamevalue,
-//    comment: inputCommentvalue
-//  };
-//};
-//return this.microverseInvolvement.basicCall2Api('POST', 'comments', commentObj);
-
-export const getComments = async (commentObj) => {
-  const response = await fetch(${commentsEndpoint}?item_id=${id});
-  const comments = await response.json();
-  return comments;
+const renderComments = (pokeId, commentsCol, commentsContainer) => {
+  commentsCol.innerHTML = '';
+  const commentsCounter = document.createElement('span');
+  const commentTittle = document.createElement('h5');
+  commentTittle.innerText = 'Comments';
+  //commentsCounter.innerText = '[0]';
+  countComments(pokeId).then((data) => {
+    commentsCounter.innerText = ` [${data}]`;
+  });
+  commentTittle.appendChild(commentsCounter);
+  commentsCol.appendChild(commentTittle);
+  DataAPI.microverseInvolvement.getComments(pokeId).then((response) => {
+    response.forEach((comment) => {
+      const mixObj = { ...comment, id: pokeId };
+      const elementComment = populateComments(mixObj);
+      commentsCol.appendChild(elementComment);
+    });
+    commentsContainer.appendChild(commentsCol);
+  });
 };
-
-export const commentsEndpoint = ${URL}/${PIKey}/comments;
-
-const displayComments = (commentObj) => {
-  getComments(commentObj).then((comments) => {
-    commentsCount(comments.length);
-    console.log(comments);
-    if (comments.length > 0) {
-      let commentsContainer = document.getElementById("imput");
-
-      let commentsContent = "";
-      comments.forEach((comment) => {
-    //    commentsContent += `<p>
-        //                    ${comment.comment}
-      //                     <form>${comment.username} {comment.creation_date} </form>
-
+const populateComments = (invComment) => {
+  //console.log(invComment);
+  const commentsRow = document.createElement('div');
+  const cmntDisplayTime = document.createElement('div');
+  const cmntDisplayName = document.createElement('div');
+  const cmntDisplayComment = document.createElement('div');
+  commentsRow.classList.add('row');
+  commentsRow.id = `commentRow_${invComment.id}`;
+  cmntDisplayTime.classList.add('col-2');
+  cmntDisplayName.classList.add('col-2');
+  cmntDisplayComment.classList.add('col-8');
+  cmntDisplayTime.innerText = invComment.creation_date;
+  cmntDisplayName.innerText = invComment.username;
+  cmntDisplayComment.innerText = invComment.comment;
+  commentsRow.appendChild(cmntDisplayTime);
+  commentsRow.appendChild(cmntDisplayName);
+  commentsRow.appendChild(cmntDisplayComment);
+  return commentsRow;
+};
 const defyJSLinter = () => {
   console.log('Created in order to not only import one thing but also to not have a linter error.');
 };
-
 export {
   createModalPopUp,
   defyJSLinter
