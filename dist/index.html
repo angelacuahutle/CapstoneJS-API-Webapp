@@ -12,19 +12,22 @@
 <script defer src="/index.bundle.js"></script></head>
 
 <body class="">
-    <nav class="row">
+    <div id="modal-popup-container" class="modal-popup hidden">
+
+    </div>
+    <nav id="navContainer" class="row">
         <div class="logo d-flex col-3">
             <img src="../css/img/pngwing.com.png" alt="" class="logo">
         </div>
         <ul class="col-9 d-flex justify-content-around align-items-center">
-            <li class="list-items"><a class="item-nav text-white" href="">cards</a></li>
+            <li class="list-items"><a class="item-nav text-white" href="">Cards</a><span id="numberOfCards"></span></li>
             <li class="list-items"><a class="item-nav text-white" href="">Pokemon</a></li>
             <li class="list-items"><a class="item-nav text-white" href="">Trainer</a></li>
         </ul>
     </nav>
-    <main class="container">
+    <main id="mainContainer" class="container">
         <section id="pokeCards" class="row align-items-center">
-            <div class="col-12 col-sm-6 col-md-3 pt-4">
+            <!--div class="col-12 col-sm-6 col-md-3 pt-4">
                 <div class="card border border-2 border-black card-style">
                     <img class="card-img-top" src="..." alt="Pokemon Card image">
                     <div class="card-body row justify-content-center align-items-center">
@@ -35,28 +38,13 @@
                         <span class="col-2 pb-2 d-flex justify-content-center align-items-center">0</span>
                         <p class="card-text justi">Some quick example text to build on the card title and make up the bulk of the
                             card's content.</p>
-                            <form>
-                                <div class="form-group row">
-                                  <label for="Your Name" class="col-sm-2 col-form-label">Email</label>
-                                  <div class="col-sm-10">
-                                    <input type="text" readonly class="form-name-plaintext" id="yourName" value="Name">
-                                  </div>
-                                </div>
-                                <div class="form-group row">
-                                  <label for="inputComment" class="col-sm-2 col-form-label">Password</label>
-                                  <div class="col-sm-10">
-                                    <input type="Comment" class="form-comment-control" id="inputComment" placeholder="Comment">
-                                  </div>
-                                </div>
-                               <buttton class="btn btn-dark commentBtn">Submit</button>
-                              </form>    
                         <a href="#" class="btn btn-primary col-6">Comments</a>
                     </div>
                 </div>
-            </div>
+            </!--div-->
         </section>
     </main>
-    <footer class="row">
+    <footer id="footerContainer" class="row">
         <div class="col-12 d-flex justify-content-start align-items-center">
             <h2>Created by Luis Abarca and Angela Cuahutle</h2>
         </div>

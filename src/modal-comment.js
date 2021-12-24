@@ -22,7 +22,7 @@ const createModalPopUp = (pokemonObject) => {
   const imputForm = document.getElementsById('YourName');
   const imputComment = document.getElementById('inputComment');
   const labelName = document.createElement('label');
-  labelName.classList.add('col-sm','col-form-label');
+  labelName.classList.add('col-sm', 'col-form-label');
   firstdivContainer.classList.add('form-group, row');
   modal.classList.add('row', 'square-container');
   closeCol.classList.add('col-12', 'd-flex', 'justify-content-end', 'align-items-center', 'close-popup');
@@ -73,21 +73,25 @@ const createModalPopUp = (pokemonObject) => {
     }
   });
 
-  const addComment = document.querySelector('commentBtn');
-  addComment.addEventListener('click', (e) => {
-    const imputForm = document.getElementsById('YourName');
-    const imputComment = document.getElementById('inputComment');
-    const bodyObj = {
-      item_id: cardId, addComment
+  const postComment = document.querySelector('commentBtn');
+  postComment.addEventListener('click', (e) => {
+      const imputForm = document.getElementsById('YourName');
+      const imputComment = document.getElementById('inputComment');
+      const bodyObj = {
+        item_id: cardId,
+        addComment
+      };
+      record
     };
-    //redcord Data
-  };
 
-});
+  });
 };
 
 const defyJSLinter = () => {
   console.log('Created in order to not only import one thing but also to not have a linter error.');
 };
 
-export { createModalPopUp, defyJSLinter };
+export {
+  createModalPopUp,
+  defyJSLinter
+};
