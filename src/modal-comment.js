@@ -84,7 +84,7 @@ const createModalPopUp = (pokemonObject) => {
   const commentsCounter = document.createElement('span');
   const commentTittle = document.createElement('h5');
   commentsColContainer.id = 'fatherCommentsContainer';
-  commentsColContainer.classList.add('col-12', 'col-md-12', 'd-flex', 'justify-content-center', 'align-items-center', 'text-white');
+  commentsColContainer.classList.add('col-12', 'col-md-12', 'text-white');
   formContainer.classList.add('col-12', 'col-md-6');
   commentsContainer.classList.add('row', 'justify-content-center', 'align-items-center', 'mt-3');
   labelName.classList.add('col-form-label');
