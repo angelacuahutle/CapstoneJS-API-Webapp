@@ -1,4 +1,4 @@
-import { displayCountComments} from './modal-comment';
+import { displayCountComments } from './modal-comment';
 
 describe('CountCommets', () => {
   test('Counting Elements added to the DOM', () => {

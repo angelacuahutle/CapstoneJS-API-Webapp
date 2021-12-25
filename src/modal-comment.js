@@ -20,7 +20,7 @@ const populateComments = (invComment) => {
   const cmntDisplayTime = document.createElement('div');
   const cmntDisplayName = document.createElement('div');
   const cmntDisplayComment = document.createElement('div');
-  commentsRow.classList.add('row', 'mt-2', 'justify-content-center', 'align-items-center','commentsRow');
+  commentsRow.classList.add('row', 'mt-2', 'justify-content-center', 'align-items-center', 'commentsRow');
   commentsRow.id = `commentRow_${invComment.id}`;
   cmntDisplayTime.classList.add('col-12', 'd-flex', 'justify-content-center', 'align-items-center', 'col-md-2', 'text-white');
   cmntDisplayName.classList.add('col-3', 'd-flex', 'justify-content-center', 'align-items-center', 'col-md-2', 'text-white', 'fw-bold');
@@ -36,7 +36,7 @@ const populateComments = (invComment) => {
 
 const renderComments = (pokeId, commentsCol, commentsCounter) => {
   commentsCol.innerHTML = '';
-  
+
   DataAPI.microverseInvolvement.getComments(pokeId).then((response) => {
     // eslint-disable-next-line no-prototype-builtins
     if (typeof response === 'object' && !response.hasOwnProperty('error')) {
@@ -50,9 +50,8 @@ const renderComments = (pokeId, commentsCol, commentsCounter) => {
       commentsCounter.innerText = ' [0]';
     }
   }).then(() => {
-    commentsCounter.innerText = ` [${displayCountComments()}]`;
+    commentsCounter.innerText = ` [${displayCountComments()}]` || ' [0]';
   });
-  
 };
 
 const createModalPopUp = (pokemonObject) => {
@@ -85,7 +84,7 @@ const createModalPopUp = (pokemonObject) => {
   const commentsCounter = document.createElement('span');
   const commentTittle = document.createElement('h5');
   commentsColContainer.id = 'fatherCommentsContainer';
-  commentsColContainer.classList.add('col-12', 'col-md-12');
+  commentsColContainer.classList.add('col-12', 'col-md-12', 'd-flex', 'justify-content-center', 'align-items-center', 'text-white');
   formContainer.classList.add('col-12', 'col-md-6');
   commentsContainer.classList.add('row', 'justify-content-center', 'align-items-center', 'mt-3');
   labelName.classList.add('col-form-label');
@@ -107,7 +106,7 @@ const createModalPopUp = (pokemonObject) => {
   inputName.setAttribute('oninput', 'validity.valid || (value="")');
   commentBtn.classList.add('col-4', 'offset-4', 'btn', 'btn-primary', 'commentBtn');
   modal.classList.add('row', 'square-container', 'border', 'border-white', 'rounded', 'm-4');
-  closeCol.classList.add('col-12', 'pt-2', 'pr-2','d-flex', 'justify-content-end', 'align-items-center', 'close-popup');
+  closeCol.classList.add('col-12', 'pt-2', 'pr-2', 'd-flex', 'justify-content-end', 'align-items-center', 'close-popup');
   closeIcon.classList.add('far', 'fa-times-circle', 'fa-3x');
   closeIcon.id = 'closeIcon';
   bodyModal.classList.add('row', 'justify-content-center', 'align-items-center');
@@ -141,9 +140,9 @@ const createModalPopUp = (pokemonObject) => {
   commentBtn.setAttribute('type', 'submit');
   commentBtn.id = `commentBtn_${pokemonObject.id}`;
   commentsCounter.innerText = ' [0]';
-  commentsColContainer.innerHTML += 'No comments yet';
+  commentsColContainer.innerText = 'No comments yet';
 
-  commentTittle.classList.add('text-white', 'd-flex','justify-content-center', 'align-items-center');
+  commentTittle.classList.add('text-white', 'd-flex', 'justify-content-center', 'align-items-center');
   commentsCounter.classList.add('text-white');
   commentTittle.innerText = 'Comments';
   countComments(pokemonObject.id).then((data) => {
@@ -169,17 +168,13 @@ const createModalPopUp = (pokemonObject) => {
   bodyModal.appendChild(divRarityLabel);
   bodyModal.appendChild(divRarityValue);
   bodyModal.appendChild(textContainer);
-  
+
   bodyModal.appendChild(commentTittle);
   bodyModal.appendChild(commentsColContainer);
   bodyModal.appendChild(formContainer);
   modal.appendChild(closeCol);
   modal.appendChild(bodyModal);
   modalContainer.appendChild(modal);
-
-
-
-
 
   const closeModal = document.querySelector('.close-popup');
   closeModal.addEventListener('click', () => {
@@ -218,5 +213,5 @@ const defyJSLinter = () => {
 export {
   createModalPopUp,
   defyJSLinter,
-  displayCountComments
+  displayCountComments,
 };
