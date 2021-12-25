@@ -130,3 +130,11 @@ ul > li.list-items > a {
   font-weight: bold;
   color: white;
 }
+
+#fatherCommentsContainer {
+  padding: 0;
+}
+
+#bodyModal {
+  padding: 0;
+}

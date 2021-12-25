@@ -15,11 +15,11 @@ const populateComments = (invComment) => {
   const cmntDisplayTime = document.createElement('div');
   const cmntDisplayName = document.createElement('div');
   const cmntDisplayComment = document.createElement('div');
-  commentsRow.classList.add('row', 'mt-2');
+  commentsRow.classList.add('row', 'mt-2', 'justify-content-center', 'align-items-center');
   commentsRow.id = `commentRow_${invComment.id}`;
-  cmntDisplayTime.classList.add('col-12', 'col-md-2', 'text-white');
-  cmntDisplayName.classList.add('col-3', 'col-md-2', 'text-white', 'fw-bold');
-  cmntDisplayComment.classList.add('col-9', 'col-md-8', 'text-white');
+  cmntDisplayTime.classList.add('col-12', 'd-flex', 'justify-content-center', 'align-items-center', 'col-md-2', 'text-white');
+  cmntDisplayName.classList.add('col-3', 'd-flex', 'justify-content-center', 'align-items-center', 'col-md-2', 'text-white', 'fw-bold');
+  cmntDisplayComment.classList.add('col-9', 'd-flex', 'justify-content-center', 'align-items-center', 'col-md-8', 'text-white');
   cmntDisplayTime.innerText = invComment.creation_date;
   cmntDisplayName.innerText = `${invComment.username}:`;
   cmntDisplayComment.innerText = invComment.comment;
@@ -29,33 +29,25 @@ const populateComments = (invComment) => {
   return commentsRow;
 };
 
-const renderComments = (pokeId, commentsCol, commentsContainer) => {
+const renderComments = (pokeId, commentsCol, commentsCounter) => {
   commentsCol.innerHTML = '';
-  const commentsCounter = document.createElement('span');
-  const commentTittle = document.createElement('h5');
-  commentTittle.classList.add('text-white');
-  commentsCounter.classList.add('text-white');
-  commentTittle.innerText = 'Comments';
-  countComments(pokeId).then((data) => {
-    commentsCounter.innerText = ` [${data}]`;
-  });
-  commentTittle.appendChild(commentsCounter);
-  commentsCol.appendChild(commentTittle);
+  
   DataAPI.microverseInvolvement.getComments(pokeId).then((response) => {
+    //console.log(response);
     // eslint-disable-next-line no-prototype-builtins
     if (typeof response === 'object' && !response.hasOwnProperty('error')) {
       response.forEach((comment) => {
         const mixObj = { ...comment, id: pokeId };
         const elementComment = populateComments(mixObj);
+        console.log(elementComment);
         commentsCol.appendChild(elementComment);
       });
-      commentsContainer.appendChild(commentsCol);
     } else if (typeof response === 'object' && response.error.status === 400) {
+      commentsCol.innerText = 'No comments yet';
       commentsCounter.innerText = ' [0]';
-      commentsCol.innerHTML += 'No comments yet';
-      commentsContainer.appendChild(commentsCol);
     }
   });
+  
 };
 
 const createModalPopUp = (pokemonObject) => {
@@ -85,15 +77,17 @@ const createModalPopUp = (pokemonObject) => {
   const spanRow = document.createElement('div');
   const spanMessage = document.createElement('span');
   const commentsColContainer = document.createElement('div');
+  const commentsCounter = document.createElement('span');
+  const commentTittle = document.createElement('h5');
   commentsColContainer.id = 'fatherCommentsContainer';
-  commentsColContainer.classList.add('col-12', 'mt-4', 'col-md-6');
+  commentsColContainer.classList.add('col-12', 'col-md-12');
   formContainer.classList.add('col-12', 'col-md-6');
   commentsContainer.classList.add('row', 'justify-content-center', 'align-items-center', 'mt-3');
   labelName.classList.add('col-form-label');
   labelComment.classList.add('col-form-label');
-  firstdivContainer.classList.add('form-group', 'row', 'align-items-center');
-  seconddivContainer.classList.add('form-group', 'row', 'align-items-center');
-  thirddivContainer.classList.add('row', 'pt-2', 'align-items-center');
+  firstdivContainer.classList.add('form-group', 'row', 'mt-2', 'align-items-center');
+  seconddivContainer.classList.add('form-group', 'row', 'mt-2', 'align-items-center');
+  thirddivContainer.classList.add('row', 'pt-2', 'mb-3', 'align-items-center');
   firstInputContainer.classList.add('col-12', 'd-flex', 'justify-content-center', 'align-items-center', 'text-white');
   secondInputContainer.classList.add('col-12', 'd-flex', 'justify-content-center', 'align-items-center', 'text-white');
   inputName.classList.add('form-name-plaintext');
@@ -107,11 +101,12 @@ const createModalPopUp = (pokemonObject) => {
   inputName.setAttribute('min', '0');
   inputName.setAttribute('oninput', 'validity.valid || (value="")');
   commentBtn.classList.add('col-4', 'offset-4', 'btn', 'btn-primary', 'commentBtn');
-  modal.classList.add('row', 'square-container');
-  closeCol.classList.add('col-12', 'd-flex', 'justify-content-end', 'align-items-center', 'close-popup');
+  modal.classList.add('row', 'square-container', 'border', 'border-white', 'rounded', 'm-4');
+  closeCol.classList.add('col-12', 'pt-2', 'pr-2','d-flex', 'justify-content-end', 'align-items-center', 'close-popup');
   closeIcon.classList.add('far', 'fa-times-circle', 'fa-3x');
   closeIcon.id = 'closeIcon';
   bodyModal.classList.add('row', 'justify-content-center', 'align-items-center');
+  bodyModal.id = 'bodyModal';
   spanRow.classList.add('row', 'justify-content-center', 'align-items-center');
   spanMessage.classList.add('text-warning', 'fw-bold');
   spanMessage.id = 'spanMessage';
@@ -119,10 +114,10 @@ const createModalPopUp = (pokemonObject) => {
   imageContainer.classList.add('col-12');
   titleContainer.classList.add('col-12', 'pt-2', 'd-flex', 'justify-content-evenly', 'align-items-center', 'justify-content-md-center', 'text-white', 'text-uppercase');
   textContainer.classList.add('col-12', 'pt-2', 'd-flex', 'justify-content-center', 'align-items-center', 'text-white', 'text-uppercase');
-  divHpLabel.classList.add('col-3', 'pt-2', 'd-flex', 'justify-content-center', 'align-items-center', 'text-white', 'text-uppercase');
-  divHpValue.classList.add('col-3', 'pt-2', 'd-flex', 'justify-content-center', 'align-items-center', 'text-white', 'text-uppercase');
-  divRarityLabel.classList.add('col-3', 'pt-2', 'd-flex', 'justify-content-center', 'align-items-center', 'text-white', 'text-uppercase');
-  divRarityValue.classList.add('col-3', 'pt-2', 'd-flex', 'justify-content-center', 'align-items-center', 'text-white', 'text-uppercase');
+  divHpLabel.classList.add('col-3', 'pt-2', 'd-flex', 'justify-content-end', 'align-items-center', 'text-white', 'text-uppercase');
+  divHpValue.classList.add('col-3', 'pt-2', 'd-flex', 'justify-content-start', 'align-items-center', 'text-white', 'text-uppercase');
+  divRarityLabel.classList.add('col-3', 'pt-2', 'd-flex', 'justify-content-end', 'align-items-center', 'text-white', 'text-uppercase');
+  divRarityValue.classList.add('col-3', 'pt-2', 'd-flex', 'justify-content-start', 'align-items-center', 'text-white', 'text-uppercase');
   imageContainer.classList.add('card-img-popup');
   imageContainer.src = pokemonObject.images.small;
   titleContainer.innerText = pokemonObject.name;
@@ -140,10 +135,20 @@ const createModalPopUp = (pokemonObject) => {
   commentBtn.innerText = 'Add Comment';
   commentBtn.setAttribute('type', 'submit');
   commentBtn.id = `commentBtn_${pokemonObject.id}`;
-  firstInputContainer.appendChild(labelName);
+  commentsCounter.innerText = ' [0]';
+  commentsColContainer.innerHTML += 'No comments yet';
+
+  commentTittle.classList.add('text-white', 'd-flex','justify-content-center', 'align-items-center');
+  commentsCounter.classList.add('text-white');
+  commentTittle.innerText = 'Comments';
+  countComments(pokemonObject.id).then((data) => {
+    commentsCounter.innerText = ` [${data}]`;
+  });
+
+  //firstInputContainer.appendChild(labelName);
   firstInputContainer.appendChild(inputName);
   firstdivContainer.appendChild(firstInputContainer);
-  secondInputContainer.appendChild(labelComment);
+  //secondInputContainer.appendChild(labelComment);
   secondInputContainer.appendChild(inputComment);
   spanRow.appendChild(spanMessage);
   seconddivContainer.appendChild(secondInputContainer);
@@ -152,8 +157,7 @@ const createModalPopUp = (pokemonObject) => {
   formContainer.appendChild(seconddivContainer);
   formContainer.appendChild(spanRow);
   formContainer.appendChild(thirddivContainer);
-  commentsContainer.appendChild(formContainer);
-  commentsContainer.appendChild(commentsColContainer);
+  commentTittle.appendChild(commentsCounter);
   closeCol.appendChild(closeIcon);
   bodyModal.appendChild(imageContainer);
   bodyModal.appendChild(titleContainer);
@@ -162,10 +166,18 @@ const createModalPopUp = (pokemonObject) => {
   bodyModal.appendChild(divRarityLabel);
   bodyModal.appendChild(divRarityValue);
   bodyModal.appendChild(textContainer);
-  bodyModal.appendChild(commentsContainer);
+  
+  bodyModal.appendChild(commentTittle);
+  bodyModal.appendChild(commentsColContainer);
+  bodyModal.appendChild(formContainer);
   modal.appendChild(closeCol);
   modal.appendChild(bodyModal);
   modalContainer.appendChild(modal);
+
+
+
+
+
   const closeModal = document.querySelector('.close-popup');
   closeModal.addEventListener('click', () => {
     modalContainer.classList.add('hidden');
@@ -190,12 +202,12 @@ const createModalPopUp = (pokemonObject) => {
       };
       DataAPI.microverseInvolvement.postComment(bodyObj).then(() => {
         // eslint-disable-next-line import/prefer-default-export
-        renderComments(pokemonObject.id, commentsColContainer, commentsContainer);
+        renderComments(pokemonObject.id, commentsColContainer, commentsCounter);
       });
     }
   });
   // eslint-disable-next-line import/prefer-default-export
-  renderComments(pokemonObject.id, commentsColContainer, commentsContainer);
+  renderComments(pokemonObject.id, commentsColContainer, commentsCounter);
 };
 
 const defyJSLinter = () => {
