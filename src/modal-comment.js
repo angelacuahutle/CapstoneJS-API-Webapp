@@ -10,12 +10,17 @@ const countComments = (pokeId) => DataAPI.microverseInvolvement.getComments(poke
   (response) => response.length,
 );
 
+const displayCountComments = () => {
+  const commentCount = document.querySelectorAll('.commentsRow');
+  return commentCount.length;
+};
+
 const populateComments = (invComment) => {
   const commentsRow = document.createElement('div');
   const cmntDisplayTime = document.createElement('div');
   const cmntDisplayName = document.createElement('div');
   const cmntDisplayComment = document.createElement('div');
-  commentsRow.classList.add('row', 'mt-2', 'justify-content-center', 'align-items-center');
+  commentsRow.classList.add('row', 'mt-2', 'justify-content-center', 'align-items-center','commentsRow');
   commentsRow.id = `commentRow_${invComment.id}`;
   cmntDisplayTime.classList.add('col-12', 'd-flex', 'justify-content-center', 'align-items-center', 'col-md-2', 'text-white');
   cmntDisplayName.classList.add('col-3', 'd-flex', 'justify-content-center', 'align-items-center', 'col-md-2', 'text-white', 'fw-bold');
@@ -33,19 +38,19 @@ const renderComments = (pokeId, commentsCol, commentsCounter) => {
   commentsCol.innerHTML = '';
   
   DataAPI.microverseInvolvement.getComments(pokeId).then((response) => {
-    //console.log(response);
     // eslint-disable-next-line no-prototype-builtins
     if (typeof response === 'object' && !response.hasOwnProperty('error')) {
       response.forEach((comment) => {
         const mixObj = { ...comment, id: pokeId };
         const elementComment = populateComments(mixObj);
-        console.log(elementComment);
         commentsCol.appendChild(elementComment);
       });
     } else if (typeof response === 'object' && response.error.status === 400) {
       commentsCol.innerText = 'No comments yet';
       commentsCounter.innerText = ' [0]';
     }
+  }).then(() => {
+    commentsCounter.innerText = ` [${displayCountComments()}]`;
   });
   
 };
@@ -145,10 +150,8 @@ const createModalPopUp = (pokemonObject) => {
     commentsCounter.innerText = ` [${data}]`;
   });
 
-  //firstInputContainer.appendChild(labelName);
   firstInputContainer.appendChild(inputName);
   firstdivContainer.appendChild(firstInputContainer);
-  //secondInputContainer.appendChild(labelComment);
   secondInputContainer.appendChild(inputComment);
   spanRow.appendChild(spanMessage);
   seconddivContainer.appendChild(secondInputContainer);
@@ -215,4 +218,5 @@ const defyJSLinter = () => {
 export {
   createModalPopUp,
   defyJSLinter,
+  displayCountComments
 };
