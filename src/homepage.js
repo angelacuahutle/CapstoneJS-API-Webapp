@@ -20,7 +20,6 @@ const getOnelikeCount = (pokemonId) => DataAPI.microverseInvolvement.getLikes().
 
 const countNumberOfCards = () => {
   const numberOfCards = document.querySelectorAll('.card');
-  console.log(numberOfCards);
   return numberOfCards.length;
 };
 
