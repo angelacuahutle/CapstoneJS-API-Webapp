@@ -27,18 +27,19 @@ class InvAPI {
       };
       return this.microverseInvolvement.basicCall2Api('POST', 'likes', bodyObj);
     },
-
-    getLikes: () => { 
-      return this.microverseInvolvement.basicCall2Api('GET', 'likes')
+    /* eslint-disable arrow-body-style */
+    getLikes: () => {
+      return this.microverseInvolvement.basicCall2Api('GET', 'likes');
     },
 
     postComment: (commentObj) => {
-      return this.microverseInvolvement.basicCall2Api('POST', 'comments', commentObj)
-      },
+      return this.microverseInvolvement.basicCall2Api('POST', 'comments', commentObj);
+    },
 
     getComments: (cardId) => {
-      return this.microverseInvolvement.basicCall2Api('GET', `comments?item_id=${cardId}`)
+      return this.microverseInvolvement.basicCall2Api('GET', `comments?item_id=${cardId}`);
     },
+    /* eslint-disable arrow-body-style */
   }
 }
 
