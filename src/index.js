@@ -3,10 +3,25 @@ import '@fortawesome/fontawesome-free/js/solid';
 import '@fortawesome/fontawesome-free/js/regular';
 import '@fortawesome/fontawesome-free/js/brands';
 import './css/bootstrap.min.css';
+
+import printMe from './print.js';
 import './css/style.css';
 
-import { renderAllPokeCards } from './homepage';
+function component() {
+  
+  const element = document.createElement('div');
+  const btn = document.createElement('button');
 
-window.onload = () => {
-  renderAllPokeCards();
-};
+  // Lodash, currently included via a script, is required for this line to work
+  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+  element.classList.add('hello');
+
+  btn.innerHTML = 'Click me and check the console!';
+  btn.onclick = printMe;
+
+  element.appendChild(btn);
+
+  return element;
+}
+
+document.body.appendChild(component());
