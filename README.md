@@ -22,7 +22,7 @@ Additional description about the project and its features.
 
 If you like, you can see a live demo of the site here:
 
-[Live Demo Link](https://angelacuahutle.github.io/CapstoneJS-API-Webapp/dist)
+[Live Demo Link](https://theluisabarca.github.io/CapstoneJS-API-Webapp/dist/)
 
 ## Getting Started
 
