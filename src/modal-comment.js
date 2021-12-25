@@ -6,8 +6,57 @@ const modalContainer = document.getElementById('modal-popup-container');
 const headerContainer = document.getElementById('navContainer');
 const mainContainer = document.getElementById('mainContainer');
 const footeContainer = document.getElementById('footerContainer');
-const countComments = (pokeId) =>
-DataAPI.microverseInvolvement.getComments(pokeId).then((response) => response.length);
+const countComments = (pokeId) => {
+  DataAPI.microverseInvolvement.getComments(pokeId).then((response) => response.length);
+};
+
+const populateComments = (invComment) => {
+  // console.log(invComment);
+  const commentsRow = document.createElement('div');
+  const cmntDisplayTime = document.createElement('div');
+  const cmntDisplayName = document.createElement('div');
+  const cmntDisplayComment = document.createElement('div');
+  commentsRow.classList.add('row');
+  commentsRow.id = `commentRow_${invComment.id}`;
+  cmntDisplayTime.classList.add('col-2');
+  cmntDisplayName.classList.add('col-2');
+  cmntDisplayComment.classList.add('col-8');
+  cmntDisplayTime.innerText = invComment.creation_date;
+  cmntDisplayName.innerText = invComment.username;
+  cmntDisplayComment.innerText = invComment.comment;
+  commentsRow.appendChild(cmntDisplayTime);
+  commentsRow.appendChild(cmntDisplayName);
+  commentsRow.appendChild(cmntDisplayComment);
+  return commentsRow;
+};
+
+const renderComments = (pokeId, commentsCol, commentsContainer) => {
+  commentsCol.innerHTML = '';
+  const commentsCounter = document.createElement('span');
+  const commentTittle = document.createElement('h5');
+  commentTittle.innerText = 'Comments';
+  countComments(pokeId).then((data) => {
+    commentsCounter.innerText = ` [${data}]`;
+  });
+  commentTittle.appendChild(commentsCounter);
+  commentsCol.appendChild(commentTittle);
+  DataAPI.microverseInvolvement.getComments(pokeId).then((response) => {
+    // eslint-disable-next-line no-prototype-builtins
+    if (typeof response === 'object' && !response.hasOwnProperty('error')) {
+      response.forEach((comment) => {
+        const mixObj = { ...comment, id: pokeId };
+        const elementComment = populateComments(mixObj);
+        commentsCol.appendChild(elementComment);
+      });
+      commentsContainer.appendChild(commentsCol);
+    } else if (typeof response === 'object' && response.error.status === 400) {
+      commentsCounter.innerText = ' [0]';
+      commentsCol.innerHTML += 'No comments yet';
+      commentsContainer.appendChild(commentsCol);
+    }
+  });
+};
+
 const createModalPopUp = (pokemonObject) => {
   const modal = document.createElement('div');
   const closeCol = document.createElement('div');
@@ -126,51 +175,7 @@ const createModalPopUp = (pokemonObject) => {
   // eslint-disable-next-line import/prefer-default-export
   renderComments(pokemonObject.id, commentsColContainer, commentsContainer);
 };
-const renderComments = (pokeId, commentsCol, commentsContainer) => {
-  commentsCol.innerHTML = '';
-  const commentsCounter = document.createElement('span');
-  const commentTittle = document.createElement('h5');
-  commentTittle.innerText = 'Comments';
-  countComments(pokeId).then((data) => {
-    commentsCounter.innerText = ` [${data}]`;
-  });
-  commentTittle.appendChild(commentsCounter);
-  commentsCol.appendChild(commentTittle);
-  DataAPI.microverseInvolvement.getComments(pokeId).then((response) => {
-    if (typeof response === 'object' && !response.hasOwnProperty('error')) {
-      response.forEach((comment) => {
-        const mixObj = { ...comment, id: pokeId };
-        const elementComment = populateComments(mixObj);
-        commentsCol.appendChild(elementComment);
-      });
-      commentsContainer.appendChild(commentsCol);
-    } else if (typeof response === 'object' && response.error.status === 400) {
-      commentsCounter.innerText = ' [0]';
-      commentsCol.innerHTML += 'No comments yet';
-      commentsContainer.appendChild(commentsCol);
-    }
-  });
-};
 
-const populateComments = (invComment) => {
-  // console.log(invComment);
-  const commentsRow = document.createElement('div');
-  const cmntDisplayTime = document.createElement('div');
-  const cmntDisplayName = document.createElement('div');
-  const cmntDisplayComment = document.createElement('div');
-  commentsRow.classList.add('row');
-  commentsRow.id = `commentRow_${invComment.id}`;
-  cmntDisplayTime.classList.add('col-2');
-  cmntDisplayName.classList.add('col-2');
-  cmntDisplayComment.classList.add('col-8');
-  cmntDisplayTime.innerText = invComment.creation_date;
-  cmntDisplayName.innerText = invComment.username;
-  cmntDisplayComment.innerText = invComment.comment;
-  commentsRow.appendChild(cmntDisplayTime);
-  commentsRow.appendChild(cmntDisplayName);
-  commentsRow.appendChild(cmntDisplayComment);
-  return commentsRow;
-};
 const defyJSLinter = () => {
 };
 export {
