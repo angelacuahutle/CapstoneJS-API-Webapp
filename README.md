@@ -19,11 +19,6 @@ Additional description about the project and its features.
 - Linters
 - API: Pokemon TCG
 - API: Involvement Microverse
-## Live Demo
-
-If you like, you can see a live demo of the site here:
-
-[Live Demo Link](https://angelacuahutle.github.io/CapstoneJS-API-Webapp/)
 
 ## Getting Started
 
