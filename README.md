@@ -20,6 +20,10 @@ Additional description about the project and its features.
 - API: Pokemon TCG
 - API: Involvement Microverse
 
+If you like, you can see a live demo of the site here:
+
+[Live Demo Link](https://angelacuahutle.github.io/CapstoneJS-API-Webapp/dist)
+
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps:
