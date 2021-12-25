@@ -6,9 +6,8 @@ const modalContainer = document.getElementById('modal-popup-container');
 const headerContainer = document.getElementById('navContainer');
 const mainContainer = document.getElementById('mainContainer');
 const footeContainer = document.getElementById('footerContainer');
-const countComments = (pokeId) => {
-  DataAPI.microverseInvolvement.getComments(pokeId).then((response) => response.length);
-};
+const countComments = (pokeId) => DataAPI.microverseInvolvement.getComments(pokeId).then(
+  (response) => response.length);
 
 const populateComments = (invComment) => {
   // console.log(invComment);
